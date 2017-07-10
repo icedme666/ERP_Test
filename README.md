@@ -12,6 +12,6 @@
     <li>driver.py：启动浏览器</li>
     <li>login.py：登录模块</li>
     <li>order.py：订单模块</li>
-</ol>
+</ul>
 <li>测试用例：ERP_Test/test_case/</li>
 </ul>
