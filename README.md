@@ -8,10 +8,10 @@
 <li>范例报告路径：/report/2017-07-07 23/15/48_result.html</li>
 -----------------------------------------------------------------------------------------------------------------
 <li>模块：ERP_Test/test_case/models/</li>
-<ol type="a">
-<li>driver.py：启动浏览器</li>
-<li>2.login.py：登录模块</li>
-<li>3.order.py：订单模块</li>
+<ol type=1>
+    <li>driver.py：启动浏览器</li>
+    <li>login.py：登录模块</li>
+    <li>order.py：订单模块</li>
 </ol>
 <li>测试用例：ERP_Test/test_case/</li>
 </ul>
