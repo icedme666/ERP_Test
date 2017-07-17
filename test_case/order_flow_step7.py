@@ -6,7 +6,7 @@ sys.path.append("./data")
 import myunit, login, const, order
 
 class CloseTest(myunit.ErpTest):
-    ''' 订单流程：7.完成结算 '''
+    ''' 订单流程：7.完成结算sthchange '''
 
     @classmethod
     def setUpClass(self):
