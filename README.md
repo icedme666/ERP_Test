@@ -7,11 +7,17 @@
 -----------------------------------------------------------------------------------------------------------------
 <li>范例报告路径：/report/2017-07-07 23/15/48_result.html</li>
 -----------------------------------------------------------------------------------------------------------------
-<li>模块：ERP_Test/test_case/models/</li>
+<li>模块：ERP_Test/test_case/modules/</li>
 <ul>
     <li>driver.py：启动浏览器</li>
-    <li>login.py：登录模块</li>
-    <li>order.py：订单模块</li>
+    <li>api_option.py：接口操作</li>
+    <li>myunit.py：自定义测试类</li>
+</ul>
+<li>Page Object模式：ERP_Test/test_case/page_obj/</li>
+<ul>
+    <li>page.py：Page基础类</li>
+    <li>login.py：登录页面</li>
+    <li>order_detail.py：订单详情页</li>
 </ul>
 <li>测试用例：ERP_Test/test_case/</li>
 </ul>
