@@ -2,7 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from time import sleep
 import sys, unittest
-sys.path.append("./models")
+sys.path.append("./modules")
 import myunit, login, const
 
 class loginTest(myunit.ErpTest):

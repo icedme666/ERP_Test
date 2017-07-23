@@ -1,8 +1,9 @@
 from selenium import webdriver
-import sys, time, random, unittest
-sys.path.append("./models")
+import sys, time
+sys.path.append("./modules")
 sys.path.append("./data")
-import myunit, login, order, const
+sys.path.append("./page_obj")
+import myunit, user_info, order_info, api_option, order_detail
 
 class ConfirmContractTest(myunit.ErpTest):
     ''' 订单流程：1.确认合同 '''
@@ -11,52 +12,48 @@ class ConfirmContractTest(myunit.ErpTest):
     def setUpClass(self):
         print('城市经理确认合同')
         myunit.ErpTest.setUpClass()
-        self.test_order = order.Order()
-        self.test_order.execute('sign')
-        login.Login().user_login(self.driver, const.CITY_MANAGER)
-        self.test_order.get_order_detail(self.driver)
-        time.sleep(const.WAIT_TIME)
+        self.api_order = api_option.OrderApi()
+        self.api_order.execute('sign')
+        self.order_page = order_detail.OrderDetail(self.driver, user_info.STORE_MANAGER)
 
     @classmethod
     def tearDownClass(self):
-        time.sleep(const.WAIT_TIME)
         myunit.ErpTest.tearDownClass()
 
     def test_1_before_name(self):
         ''' 操作前订单详情： 客户姓名 '''
-        name_element = self.driver.find_element_by_xpath(const.ORDER_DETAIL_ELEMENT['name'])
-        self.assertEqual(name_element.get_attribute('innerHTML'), self.test_order.order_data['name'])
+        name = self.order_page.get_detai_value('name')
+        self.assertEqual( name, self.api_order.data['name'] )
 
     def test_2_before_telephone(self):
         ''' 操作前订单详情： 客户电话 '''
-        tele_element = self.driver.find_element_by_xpath(const.ORDER_DETAIL_ELEMENT['telephone'])
-        self.assertEqual(tele_element.get_attribute('innerHTML'), self.test_order.order_data['telephone'])
+        telephone = self.order_page.get_detai_value('telephone')
+        self.assertEqual( telephone, self.api_order.data['telephone'] )
 
     def test_3_check(self):
         ''' 发送确认合同请求 '''
-        random_values = {
-            'selling_price': random.randint(0, 999999),  #合同应收款总额
-            'body_price': random.randint(0, 999999),  #车身售价
-            'selling_deposit_amount': random.randint(0, 999999),  #客户订金收取
-            'contract_number': 'ABCD201706'+ str(random.randint(10,30)) + 'X' #订单编号
-        }
-        self.test_order.confirm_contract_send_value( self.driver, random_values)
-        self.test_order.check(self.driver, 'confirm_contract')
-        message_element = self.driver.find_element_by_xpath(const.STATUS_MESSAGE)
-        self.assertEqual(message_element.get_attribute('innerHTML'), '城市经理已确认合同,待资源部确认车源')
+        self.order_page.send_values( 'confirm_contract', order_info.random_confirm_contract_params() )
+        self.order_page.check( 'confirm_contract')
+        self.api_order.get_a_order()
+        status_message = self.order_page.get_status_message()
+        self.assertEqual( status_message , '店铺经理已确认合同,待资源部确认车源')
 
     def test_4_after_selling_price(self):
         ''' 操作后订单详情： 合同应收款总额 '''
-        self.assertEqual(self.test_order.confirm_contract_get_value( self.driver )['selling_price'], self.test_order.order_data['selling_price'])
+        selling_price = float(self.order_page.get_detai_value('selling_price').replace(',', ''))
+        self.assertEqual(selling_price, self.api_order.data['selling_price'])
 
     def test_5_after_body_price(self):
         ''' 操作后订单详情： 车身售价 '''
-        self.assertEqual(self.test_order.confirm_contract_get_value( self.driver )['body_price'], self.test_order.order_data['body_price'])
+        body_price = float(self.order_page.get_detai_value('body_price').replace(',', ''))
+        self.assertEqual(body_price, self.api_order.data['body_price'])
 
     def test_6_after_selling_deposit_amount(self):
         ''' 操作后订单详情： 客户订金收取 '''
-        self.assertEqual(self.test_order.confirm_contract_get_value( self.driver )['selling_deposit_amount'], self.test_order.order_data['selling_deposit_amount'])
+        selling_deposit_amount = float(self.order_page.get_detai_value('selling_deposit_amount').replace(',', ''))
+        self.assertEqual(selling_deposit_amount, self.api_order.data['selling_deposit_amount'])
 
     def test_7_after_contract_number(self):
         ''' 操作后订单详情： 订单编号 '''
-        self.assertEqual(self.test_order.confirm_contract_get_value( self.driver )['contract_number'], self.test_order.order_data['contract_number'])
+        contract_number = self.order_page.get_detai_value('contract_number')
+        self.assertEqual(contract_number, self.api_order.data['contract_number'])

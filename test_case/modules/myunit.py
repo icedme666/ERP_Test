@@ -1,13 +1,11 @@
-from selenium import webdriver
 import unittest
-from driver import browser
+import driver
 
 class ErpTest(unittest.TestCase):
 
     @classmethod
     def setUpClass(self):
-        self.driver = browser()
-        self.driver.maximize_window()
+        self.driver = driver.browser()
 
     @classmethod
     def tearDownClass(self):
