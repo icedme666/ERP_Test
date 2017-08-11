@@ -1,6 +1,7 @@
 import http.client, json, order_info, user_info
 
 class Api:
+    @classmethod
     def APIconnection(self, method, url, params=None, token=None):
         conn = http.client.HTTPConnection("staging.api.itsmycar.cn")
         if token == None: headers = { 'Content-Type': 'application/json' }
@@ -26,8 +27,8 @@ class UserApi(Api):
     def get_token(self):
         return 'Token token=' + self.user_data['token']
 
-    def get_my_stats(self, token):
-        self.response = self.APIconnection("GET", "/v1/users/my_stats ", token=token)
+    def get_my_stats(self):
+        self.response = self.APIconnection("GET", "/v1/users/my_stats ", token=self.get_token())
         return self.response['data']
 
 #订单API操作

@@ -22,38 +22,38 @@ class ConfirmContractTest(myunit.ErpTest):
 
     def test_1_before_name(self):
         ''' 操作前订单详情： 客户姓名 '''
-        name = self.order_page.get_detai_value('name')
+        name = self.order_page.get_detai_value('客户姓名')
         self.assertEqual( name, self.api_order.data['name'] )
 
     def test_2_before_telephone(self):
         ''' 操作前订单详情： 客户电话 '''
-        telephone = self.order_page.get_detai_value('telephone')
+        telephone = self.order_page.get_detai_value('客户电话')
         self.assertEqual( telephone, self.api_order.data['telephone'] )
 
     def test_3_check(self):
         ''' 发送确认合同请求 '''
         self.order_page.send_values( 'confirm_contract', order_info.random_confirm_contract_params() )
-        self.order_page.check( 'confirm_contract')
+        self.order_page.check()
         self.api_order.get_a_order()
         status_message = self.order_page.get_status_message()
         self.assertEqual( status_message , '店铺经理已确认合同,待资源部确认车源')
 
     def test_4_after_selling_price(self):
         ''' 操作后订单详情： 合同应收款总额 '''
-        selling_price = float(self.order_page.get_detai_value('selling_price').replace(',', ''))
+        selling_price = float(self.order_page.get_detai_value('合同应收款总额(元)').replace(',', ''))
         self.assertEqual(selling_price, self.api_order.data['selling_price'])
 
     def test_5_after_body_price(self):
         ''' 操作后订单详情： 车身售价 '''
-        body_price = float(self.order_page.get_detai_value('body_price').replace(',', ''))
+        body_price = float(self.order_page.get_detai_value('车身售价(元)').replace(',', ''))
         self.assertEqual(body_price, self.api_order.data['body_price'])
 
     def test_6_after_selling_deposit_amount(self):
         ''' 操作后订单详情： 客户订金收取 '''
-        selling_deposit_amount = float(self.order_page.get_detai_value('selling_deposit_amount').replace(',', ''))
+        selling_deposit_amount = float(self.order_page.get_detai_value('客户订金收取(元)').replace(',', ''))
         self.assertEqual(selling_deposit_amount, self.api_order.data['selling_deposit_amount'])
 
     def test_7_after_contract_number(self):
         ''' 操作后订单详情： 订单编号 '''
-        contract_number = self.order_page.get_detai_value('contract_number')
+        contract_number = self.order_page.get_detai_value('订单编号')
         self.assertEqual(contract_number, self.api_order.data['contract_number'])

@@ -59,3 +59,68 @@ HEAD_INTRODUCER = {
     'password': '123456',
     'role': 'user'
 }
+
+STORE_MANAGER_STATUS = {
+    'published': '处理中(待领取)',
+    'accepted': '处理中(待签约)',
+    'signed': '待处理(待确认合同)',
+    'contract_confirmed': '处理中(待确认车源)',
+    'resource_confirmed': '处理中(待确认垫资)',
+    'capital_confirmed': '处理中(待完成订车)',
+    'car_ordered': '处理中(待完成垫资)',
+    'capital_filled': '待处理(待完成交车)',
+    'received': '处理中(待结算奖励)',
+    'closed': '已完成(已完成)'
+}
+
+RESOURCE_MANAGER_STATUS = {
+    'published': '处理中(待领取)',
+    'accepted': '处理中(待签约)',
+    'signed': '处理中(待确认合同)',
+    'contract_confirmed': '待处理(待确认车源)',
+    'resource_confirmed': '处理中(待确认垫资)',
+    'capital_confirmed': '待处理(待完成订车)',
+    'car_ordered': '处理中(待完成垫资)',
+    'capital_filled': '处理中(待完成交车)',
+    'received': '处理中(待结算奖励)',
+    'closed': '已完成(已完成)'
+}
+
+CAPITAL_MANAGER_STATUS = {
+    'published': '处理中(待领取)',
+    'accepted': '处理中(待签约)',
+    'signed': '处理中(待确认合同)',
+    'contract_confirmed': '处理中(待确认车源)',
+    'resource_confirmed': '待处理(待确认垫资)',
+    'capital_confirmed': '处理中(待完成订车)',
+    'car_ordered': '待处理(待完成垫资)',
+    'capital_filled': '处理中(待完成交车)',
+    'received': '处理中(待结算奖励)',
+    'closed': '已完成(已完成)'
+}
+
+ACCOUNTANT_STATUS = {
+    'published': '处理中(待领取)',
+    'accepted': '处理中(待签约)',
+    'signed': '处理中(待确认合同)',
+    'contract_confirmed': '处理中(待确认车源)',
+    'resource_confirmed': '处理中(待确认垫资)',
+    'capital_confirmed': '处理中(待完成订车)',
+    'car_ordered': '处理中(待完成垫资)',
+    'capital_filled': '处理中(待完成交车)',
+    'received': '待处理(待结算奖励)',
+    'closed': '已完成(已完成)'
+}
+
+SALES_DIRECTOR_STATUS = {
+    'published': '处理中(待领取)',
+    'accepted': '处理中(待签约)',
+    'signed': '处理中(待确认合同)',
+    'contract_confirmed': '处理中(待确认车源)',
+    'resource_confirmed': '处理中(待确认垫资)',
+    'capital_confirmed': '处理中(待完成订车)',
+    'car_ordered': '处理中(待完成垫资)',
+    'capital_filled': '处理中(待完成交车)',
+    'received': '处理中(待结算奖励)',
+    'closed': '已完成(已完成)'
+}

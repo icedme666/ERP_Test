@@ -11,14 +11,18 @@ class Login(page.Page):
 
     def login(self, role):
         self.find(user_ele.USER_NAME_INPUT).clear()
-        self.find(user_ele.PASSWORD_INPUT).clear()
         self.find(user_ele.USER_NAME_INPUT).send_keys(role['username'])
+        self.find(user_ele.PASSWORD_INPUT).clear()
         self.find(user_ele.PASSWORD_INPUT).send_keys(role['password'])
         self.find(user_ele.PASSWORD_INPUT).send_keys(Keys.ENTER)
         time.sleep(10)
 
-    def logout(self):
-        self.find(user_ele.USER_CENTER_BUTTON).click()
-        time.sleep(const.WAIT_TIME)
-        self.find(user_ele.LOGOUT_BUTTON).click()
-        self.driver.quit()
+    def logout(self, role=None):
+        self.find(user_ele.USER_CENTER_BUTTON, sleep=True).click()
+        if role == None: self.find(user_ele.LOGOUT_BUTTON, sleep=True).click()
+        if role == 'sales_director': self.find(user_ele.SALES_DIRECTOR_LOGOUT_BUTTON, sleep=True).click()
+        self.alert(sleep=True)
+        time.sleep(10)
+
+    def get_login_title(self):
+        return self.find(user_ele.LOGIN_TITLE).get_attribute('innerHTML')
