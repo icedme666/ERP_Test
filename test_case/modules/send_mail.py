@@ -6,8 +6,8 @@ def send_mail(filename):
     host = 'smtp.sina.com'
     msg = MIMEMultipart()
     msg['from'] = 'iced_me@sina.com'
-    from_password = 'z1x2c35114462'
-    msg['to'] = '327144262@qq.com'
+    from_password = ''
+    msg['to'] = ''
     msg['Subject'] = filename[9:]
 
     att = MIMEText(open(filename).read(), 'html', 'utf-8')
